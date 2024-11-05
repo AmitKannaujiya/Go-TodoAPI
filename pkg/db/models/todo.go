@@ -10,12 +10,12 @@ type Tabler interface {
 }
 
 type Todo struct {
-	ID    		uint       		`gorm:"primaryKey"`
-	Title		string			`gorm:"column:title"`
-	Completed	bool			`gorm:"column:completed_status"`
-	CreatedAt	time.Time		`gorm:"column:created_at"`
-	UpdatedAt	time.Time		`gorm:"column:updated_at"`
-	DeletedAt	gorm.DeletedAt	`gorm:"column:deleted_at"`
+	ID    				uint       		`gorm:"primaryKey"`
+	Title				string			`gorm:"column:title"`
+	CompletedStatus 	bool			`gorm:"column:completed_status"`
+	CreatedAt			time.Time		`gorm:"column:created_at"`
+	UpdatedAt			time.Time		`gorm:"column:updated_at"`
+	DeletedAt			gorm.DeletedAt	`gorm:"column:deleted_at"`
 }
 
 func (Todo) TableName() string {
