@@ -20,7 +20,10 @@ func Execute(config *c.Config) {
 		WriteTimeout: time.Duration(20 * time.Second),
 		Handler: router,
 	}
-	SetupRoutes(router)
+	// local memory route
+	//SetupRoutes(router)
+	// setup db routes
+	SetupDBRoutes(config, router)
 	server.ListenAndServe()
 }
 

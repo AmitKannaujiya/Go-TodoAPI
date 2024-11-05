@@ -1,3 +1,14 @@
 app: 
   host: localhost
   port: 9090
+
+tables:
+  todos: pm_todos
+  users: pm_users
+
+db:
+  db_host: localhost
+  db_port: 3306
+  db_name: test_todo_db
+  db_username: root
+  db_password: P@ssword
