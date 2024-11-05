@@ -26,12 +26,12 @@ func GetAllTodos(context *gin.Context) {
 func CreateTodo(context *gin.Context) {
 	var todo todo.Todo
 	if err := context.BindJSON(&todo); err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"message": err})
+		context.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 		return
 	}
 	er := todoSer.CreateTodo(todo)
 	if er != nil {
-		context.JSON(http.StatusContinue, gin.H{"message": er})
+		context.JSON(http.StatusContinue, gin.H{"message": er.Error()})
 		return
 	}
 	context.IndentedJSON(http.StatusCreated, todo)
@@ -40,12 +40,12 @@ func CreateTodo(context *gin.Context) {
 func GetTodo(context *gin.Context) {
 	id , er := strconv.Atoi(context.Param("id"))
 	if er != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"message": er})
+		context.JSON(http.StatusBadRequest, gin.H{"message": er.Error()})
 		return
 	}
 	td, err := todoSer.GetTodo(int(id))
 	if err != nil {
-		context.JSON(http.StatusNotFound, gin.H{"message": err})
+		context.JSON(http.StatusNotFound, gin.H{"message": err.Error()})
 		return 
 	}
 	context.IndentedJSON(http.StatusOK, td)
@@ -54,12 +54,12 @@ func GetTodo(context *gin.Context) {
 func UpdateTodo(context *gin.Context) {
 	var todo todo.Todo
 	if err := context.BindJSON(&todo); err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"message": err})
+		context.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 		return
 	}
 	er := todoSer.UpdateTodo(todo)
 	if er != nil {
-		context.JSON(http.StatusNotFound, gin.H{"message": er})
+		context.JSON(http.StatusNotFound, gin.H{"message": er.Error()})
 		return
 	}
 	context.IndentedJSON(http.StatusOK, todo)
@@ -68,12 +68,12 @@ func UpdateTodo(context *gin.Context) {
 func DeleteTodo(context *gin.Context) {
 	id , er := strconv.Atoi(context.Param("id"))
 	if er != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"message": er})
+		context.JSON(http.StatusBadRequest, gin.H{"message": er.Error()})
 		return
 	}
 	err := todoSer.DeleteTodo(id)
 	if err != nil {
-		context.JSON(http.StatusNotFound, gin.H{"message": err})
+		context.JSON(http.StatusNotFound, gin.H{"message": err.Error()})
 		return
 	}
 	context.IndentedJSON(http.StatusOK, gin.H{"message": "Deleted Successful"})
