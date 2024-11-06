@@ -12,29 +12,28 @@ import (
 var once sync.Once
 
 type App struct {
-	Host    string `yaml:"host"`
-	Port    string `yaml:"port"`
+	Host string `yaml:"host"`
+	Port string `yaml:"port"`
 }
 
 type Config struct {
-	App     	App  	`yaml:"app"`
-	Tables		Tables	`yaml:"tables"`
-	DB			Db		`yaml:"db"`  
+	App    App    `yaml:"app"`
+	Tables Tables `yaml:"tables"`
+	DB     Db     `yaml:"db"`
 }
 
 type Tables struct {
-	Todos    string 	`yaml:"todos"`
-	Users    string 	`yaml:"users"`
+	Todos string `yaml:"todos"`
+	Users string `yaml:"users"`
 }
 
 type Db struct {
-	DbHost   		string 		`yaml:"db_host"`
-	DbPort    		int 		`yaml:"db_port"`
-	DbName    		string 		`yaml:"db_name"`
-	DbUserName    	string 		`yaml:"db_username"`
-	DbPassword    	string 		`yaml:"db_password"`
+	DbHost     string `yaml:"db_host"`
+	DbPort     int    `yaml:"db_port"`
+	DbName     string `yaml:"db_name"`
+	DbUserName string `yaml:"db_username"`
+	DbPassword string `yaml:"db_password"`
 }
-
 
 func GetConfig() (*Config, error) {
 	var config Config

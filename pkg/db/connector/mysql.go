@@ -7,13 +7,13 @@ import (
 	"log"
 	"sync"
 
+	m "go-todo/pkg/db/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	m "go-todo/pkg/db/models"
 )
 
 type MysqlConnector struct {
-	DB *gorm.DB
+	DB     *gorm.DB
 	Config *config.Config
 }
 
@@ -23,10 +23,10 @@ var OnceMysqlInstance sync.Once
 
 func GetDBConnectorInstance(config *config.Config) *MysqlConnector {
 	if SingletonMysqlInstance == nil {
-		OnceMysqlInstance.Do(func ()  {
+		OnceMysqlInstance.Do(func() {
 			if db, err := setupMysql(config); err == nil {
 				SingletonMysqlInstance = &MysqlConnector{
-					DB: db,
+					DB:     db,
 					Config: config,
 				}
 			}
@@ -37,7 +37,7 @@ func GetDBConnectorInstance(config *config.Config) *MysqlConnector {
 
 func setupMysql(config *config.Config) (*gorm.DB, error) {
 	connectionStr := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
-	 	config.DB.DbUserName, config.DB.DbPassword, config.DB.DbHost, config.DB.DbPort, config.DB.DbName)
+		config.DB.DbUserName, config.DB.DbPassword, config.DB.DbHost, config.DB.DbPort, config.DB.DbName)
 	db, err := gorm.Open(mysql.Open(connectionStr), &gorm.Config{})
 
 	if err != nil {

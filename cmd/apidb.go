@@ -1,7 +1,6 @@
 package cmd
 
 import (
-
 	ts "go-todo/pkg/services"
 	// "net/http"
 	// "strconv"
@@ -9,7 +8,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 )
+
 var todoServ *ts.TodoSerice
+
 func SetupDBRoutes(config *config.Config, router *gin.Engine) {
 	todoServ = ts.GetTodoService(config)
 	router.GET("/todos", todoServ.GetAllTodos)
@@ -47,7 +48,7 @@ func SetupDBRoutes(config *config.Config, router *gin.Engine) {
 // 	td, err := todoSer.GetTodo(int(id))
 // 	if err != nil {
 // 		context.JSON(http.StatusNotFound, gin.H{"message": err.Error()})
-// 		return 
+// 		return
 // 	}
 // 	context.IndentedJSON(http.StatusOK, td)
 // }
@@ -79,5 +80,3 @@ func SetupDBRoutes(config *config.Config, router *gin.Engine) {
 // 	}
 // 	context.IndentedJSON(http.StatusOK, gin.H{"message": "Deleted Successful"})
 // }
-
-
